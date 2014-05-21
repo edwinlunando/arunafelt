@@ -1,7 +1,11 @@
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry, DELETION
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.sites.models import Site
 from django.utils.html import escape
 from django.core.urlresolvers import reverse
+from .models import Contact, User
+from .forms import UserCreationAdminForm
 
 
 class LogEntryAdmin(admin.ModelAdmin):
@@ -54,8 +58,33 @@ class LogEntryAdmin(admin.ModelAdmin):
     object_link.short_description = u'object'
 
     def queryset(self, request):
-        return super(LogEntryAdmin, self).queryset(request) \
-            .prefetch_related('content_type')
+        return super(LogEntryAdmin, self).queryset(request).prefetch_related('content_type')
 
 
+class UserCustomAdmin(UserAdmin):
+    """
+    User CMS. We need to change the add form because we use out custom User model.
+    """
+    add_form = UserCreationAdminForm
+
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        (('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
+                                      'groups', 'user_permissions')}),
+        (('Important dates'), {'fields': ('last_login', 'date_joined')}),
+        (('Lainnya'), {'fields': ('role', 'gender', 'facebook', 'twitter', 'about_me')}),
+    )
+
+
+class ContactAdmin(admin.ModelAdmin):
+    model = Contact
+
+    list_display = ['name', 'address', 'telephone', 'email', 'message']
+
+    search_fields = ['name', 'email', 'message']
+
+admin.site.register(User, UserCustomAdmin)
+admin.site.register(Contact, ContactAdmin)
 admin.site.register(LogEntry, LogEntryAdmin)
+admin.site.unregister(Site)
