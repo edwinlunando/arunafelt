@@ -3,3 +3,4 @@
 -r base.txt
 
 gunicorn==0.18
+newrelic

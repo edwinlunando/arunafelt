@@ -1,10 +1,16 @@
+import datetime
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import SetPasswordForm
 from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import redirect, render
-from django.views.generic import TemplateView
+from django.http import Http404
+from django.shortcuts import redirect, render, get_object_or_404
+from django.utils.timezone import utc
+from django.views.generic import TemplateView, View
 from django.views.generic.edit import FormMixin
-from .forms import SignUpForm, SignInForm, ContactForm
+from .forms import SignUpForm, SignInForm, ContactForm, ForgotPasswordForm
+from .mailers import ForgotPasswordEmail
+from .models import ForgotPassword, User
 
 
 # Create your views here.
@@ -60,7 +66,6 @@ class SignInPage(FormMixin, TemplateView):
             return self.form_invalid(form)
 
     def form_valid(self, form):
-        # todo login logic
         username_or_email = form.cleaned_data['username_or_email']
         password = form.cleaned_data['password']
         user = authenticate(username=username_or_email, password=password)
@@ -104,4 +109,67 @@ class ContactPage(FormMixin, TemplateView):
 
     def form_valid(self, form):
         form.save()
+        messages.success(self.request, "Pesan berhasil terkirim!")
         return super(ContactPage, self).form_valid(form)
+
+
+class ForgotPasswordPage(FormMixin, TemplateView):
+    """
+    Forgot Password page to let User reset their password through the link send by email
+    """
+    template_name = "core/forgot-password.html"
+    form_class = ForgotPasswordForm
+    success_url = reverse_lazy('home')
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(ForgotPasswordPage, self).get_context_data(**kwargs)
+        context['form'] = self.form_class()
+        return context
+
+    def form_valid(self, form):
+        email_address = form.cleaned_data['email']
+        user = get_object_or_404(User, email=email_address)
+        token = ForgotPassword(user=user)
+        token.save()
+        email = ForgotPasswordEmail([token.user.email], token.guid, self.request.get_host())
+        email.send()
+        messages.success(self.request, "Password berhasil direset!")
+        return super(ForgotPasswordPage, self).form_valid(form)
+
+
+class ResetPasswordPage(FormMixin, View):
+    """
+    Page to reset user password from the given link. After reset, the link must be made expired.
+    """
+    template_name = "core/reset-password.html"
+    data = {}
+    form_class = SetPasswordForm
+    success_url = reverse_lazy('home')
+
+    def post(self, request, guid):
+        token = get_object_or_404(ForgotPassword, guid=guid)
+        self.data['form'] = form = self.form_class(data=request.POST, user=token.user)
+        if form.is_valid():
+            token.delete()
+            return self.form_valid(form)
+        return render(request, self.template_name, self.data)
+
+    def get(self, request, guid):
+        token = get_object_or_404(ForgotPassword, guid=guid)
+        if token.created < datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.timedelta(days=1):
+            token.delete()
+            raise Http404
+        self.data['form'] = self.form_class(user=token.user)
+        return render(request, self.template_name, self.data)
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "Password berhasil direset!")
+        return super(ResetPasswordPage, self).form_valid(form)

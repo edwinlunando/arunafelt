@@ -100,8 +100,8 @@ STATICFILES_DIRS = (
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
 )
 
 # See http://django-pipeline.readthedocs.org/en/latest/installation.html#recommendations
@@ -194,10 +194,12 @@ DJANGO_APPS = (
     # 'django.contrib.humanize',
 
     # Admin panel and documentation:
+    'grappelli',
     'django.contrib.admin',
     # 'django.contrib.admindocs',
 
     # Installed application
+
     'widget_tweaks',
     'admin_honeypot',
     'ckeditor',
@@ -330,3 +332,8 @@ PIPELINE_JS = {
 }
 
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
+
+
+# DJANGO GRAPPELLI
+
+GRAPPELLI_ADMIN_TITLE = 'arunafelt'

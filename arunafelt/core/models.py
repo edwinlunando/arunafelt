@@ -4,7 +4,8 @@ from autoslug import AutoSlugField
 from ckeditor.fields import RichTextField
 from model_utils.models import TimeStampedModel
 from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFit
+from pilkit.processors import ResizeToFit
+from uuid import uuid4
 
 
 class User(AbstractUser):
@@ -57,6 +58,12 @@ class ForgotPassword(TimeStampedModel):
     """
     user = models.ForeignKey(User)
     guid = models.CharField(max_length=60)
+
+    def save(self, *args, **kwargs):
+        uuid_token = uuid4()
+        self.guid = uuid_token.get_hex()
+
+        super(ForgotPassword, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.user.get_full_name() + " " + self.guid

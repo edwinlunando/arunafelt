@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, include, url
-from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
 from core import views as core_views
@@ -12,6 +11,9 @@ urlpatterns = patterns('',
                        url(r'^$', TemplateView.as_view(template_name='base.html'), name='home'),
                        url(r'^sign-in/$', core_views.SignInPage.as_view(), name='sign-in'),
                        url(r'^contact/$', core_views.ContactPage.as_view(), name='contact'),
+                       url(r'^forgot-password/$', core_views.ForgotPasswordPage.as_view(), name='forgot-password'),
+                       url(r'^reset-password/(?P<guid>[-_\w]+)$',
+                           core_views.ResetPasswordPage.as_view(), name='reset-password'),
 
                        # Examples:
                        # url(r'^$', 'arunafelt.views.home', name='home'),
@@ -21,8 +23,9 @@ urlpatterns = patterns('',
                        # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
                        # Uncomment the next line to enable the admin:
-                       url(r'^admin/', include('admin_honeypot.urls')),
-                       url(r'^backend/', include(admin.site.urls)),
+                       (r'^grappelli/', include('grappelli.urls')), # grappelli URLS
+                       url(r'^admin/', include('admin_honeypot.urls')), # The fake admin URI
+                       url(r'^backend/', include(admin.site.urls)), # The real admin URI
                        )
 
 # Uncomment the next line to serve media files in dev.

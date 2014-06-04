@@ -148,7 +148,7 @@ class ForgotPasswordForm(forms.Form):
             User._default_manager.get(email=email)
         except User.DoesNotExist:
             raise forms.ValidationError(
-                self.error_messages['duplicate_username'],
-                code='duplicate_username',
+                'Email not exist',
+                code='email_not_exist',
             )
         return email
