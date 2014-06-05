@@ -58,10 +58,10 @@ DATABASES = {
 
 # GENERAL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
-TIME_ZONE = 'America/Los_Angeles'
+TIME_ZONE = 'Asia/Jakarta'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'id'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
@@ -194,16 +194,15 @@ DJANGO_APPS = (
     # 'django.contrib.humanize',
 
     # Admin panel and documentation:
-    'grappelli',
+    'grappelli',  # https://github.com/sehmaschine/django-grappelli
     'django.contrib.admin',
     # 'django.contrib.admindocs',
 
     # Installed application
-
-    'widget_tweaks',
-    'admin_honeypot',
-    'ckeditor',
-    'pipeline',
+    'widget_tweaks',  # https://bitbucket.org/kmike/django-widget-tweaks/
+    'admin_honeypot',  # https://github.com/dmpayton/django-admin-honeypot
+    'ckeditor',  # https://pypi.python.org/pypi/django-ckeditor-updated/4.4.0
+    'pipeline',  # https://github.com/cyberdelia/django-pipeline
 )
 
 # Apps specific for this project go here.
@@ -267,7 +266,7 @@ SOUTH_TESTS_MIGRATE = False
 
 # USER MODEL CONFIGURATION
 
-AUTH_USER_MODEL = 'core.User'
+AUTH_USER_MODEL = 'core.User'  # OUR CUSTOM USER MODEL
 
 LOGIN_REDIRECT_URL = '/sign-in/'
 LOGIN_URL = '/sign-in/'
@@ -284,7 +283,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend'
 )
 
-# CKEDITOR
+# DJANGO-CKEDITOR-UPDATED
+# https://pypi.python.org/pypi/django-ckeditor-updated/4.4.0
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = 'Pillow'
@@ -319,7 +319,8 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-# PIPELINE
+# DJANGO-PIPELINE
+# https://github.com/cyberdelia/django-pipeline
 
 PIPELINE_JS = {
     'application': {
@@ -334,6 +335,6 @@ PIPELINE_JS = {
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 
 
-# DJANGO GRAPPELLI
+# DJANGO GRAPPELLI https://github.com/sehmaschine/django-grappelli
 
 GRAPPELLI_ADMIN_TITLE = 'arunafelt'
