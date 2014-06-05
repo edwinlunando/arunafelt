@@ -1,11 +1,11 @@
-import datetime
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import SetPasswordForm
 from django.core.urlresolvers import reverse_lazy
+from django.db import transaction
 from django.http import Http404
 from django.shortcuts import redirect, render, get_object_or_404
-from django.utils.timezone import utc
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, View
 from django.views.generic.edit import FormMixin
 from .forms import SignUpForm, SignInForm, ContactForm, ForgotPasswordForm
@@ -58,8 +58,7 @@ class SignInPage(FormMixin, TemplateView):
         return context
 
     def post(self, request):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
+        form = self.form_class(request.POST)
         if form.is_valid():
             return self.form_valid(form)
         else:
@@ -153,6 +152,7 @@ class ResetPasswordPage(FormMixin, View):
     form_class = SetPasswordForm
     success_url = reverse_lazy('home')
 
+    @method_decorator(transaction.atomic)
     def post(self, request, guid):
         token = get_object_or_404(ForgotPassword, guid=guid)
         self.data['form'] = form = self.form_class(data=request.POST, user=token.user)
@@ -163,7 +163,7 @@ class ResetPasswordPage(FormMixin, View):
 
     def get(self, request, guid):
         token = get_object_or_404(ForgotPassword, guid=guid)
-        if token.created < datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.timedelta(days=1):
+        if token.is_valid():
             token.delete()
             raise Http404
         self.data['form'] = self.form_class(user=token.user)
@@ -172,4 +172,4 @@ class ResetPasswordPage(FormMixin, View):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, "Password berhasil direset!")
-        return super(ResetPasswordPage, self).form_valid(form)
+        return redirect('home')

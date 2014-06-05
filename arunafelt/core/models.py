@@ -1,7 +1,9 @@
+from datetime import datetime, timedelta
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from autoslug import AutoSlugField
 from ckeditor.fields import RichTextField
+from django.utils.timezone import utc
 from model_utils.models import TimeStampedModel
 from imagekit.models import ImageSpecField
 from pilkit.processors import ResizeToFit
@@ -64,6 +66,12 @@ class ForgotPassword(TimeStampedModel):
         self.guid = uuid_token.get_hex()
 
         super(ForgotPassword, self).save(*args, **kwargs)
+
+    def is_valid(self):
+        if self.created < datetime.utcnow().replace(tzinfo=utc) - timedelta(days=1):
+            return True
+        else:
+            return False
 
     def __unicode__(self):
         return self.user.get_full_name() + " " + self.guid
