@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
+from django.contrib.auth.views import logout
 from django.views.generic import TemplateView
 from core import views as core_views
 
@@ -10,6 +11,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        url(r'^$', TemplateView.as_view(template_name='base.html'), name='home'),
                        url(r'^sign-in/$', core_views.SignInPage.as_view(), name='sign-in'),
+                       url(r'^sign-out/$', logout, {'next_page': '/'}, name='sign-out'),
                        url(r'^contact/$', core_views.ContactPage.as_view(), name='contact'),
                        url(r'^forgot-password/$', core_views.ForgotPasswordPage.as_view(), name='forgot-password'),
                        url(r'^reset-password/(?P<guid>[-_\w]+)$',
