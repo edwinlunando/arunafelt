@@ -17,4 +17,34 @@ development is easier. The specific goals are:
 4. Assets pipelining with django-pipeline with jsmin and gzip compression for static files
 5. Twitter Bootstrap default integration
 
+How to use
+==========
+
+Libraries
+=========
+
+In this section, I will explain the usage of every libraries that have been included in the application
+
+Django
+------
+
+The main framework.
+
+bpython
+-------
+
+bpython is an alternative interface from the standard python interpreter. It has auto complete feature and in-line 
+syntax highlighting
+
+django-braces
+-------------
+
+django-braces provides a lot of mixin class to help you to write clean code in Django class based views. Probably the 
+most useful Mixin is `LoginRequiredMixin`
+ 
+django-model-utils
+------------------
+
+
+
 This repo is in under heavy development!
