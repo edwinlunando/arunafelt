@@ -9,13 +9,13 @@ development is easier. The specific goals are:
 3. **High performance** by setting performance tuning by default
  
  
- It features are:
+It features are:
 
-1. Custom User model with email or username authentication
-2. Mandatory-boring-to-develop pages like sign in, sign up, contact, and reset password
-3. Admin page protection with django-admin-honeypot and admin log activity
-4. Assets pipelining with django-pipeline with jsmin and gzip compression for static files
-5. Twitter Bootstrap default integration
+- Custom User model with email or username authentication
+- Mandatory-boring-to-develop pages like sign in, sign up, contact, and reset password
+- Admin page protection with django-admin-honeypot and admin log activity
+- Assets pipelining with django-pipeline with jsmin and gzip compression for static files
+- Twitter Bootstrap default integration
 
 Quick Start
 ===========
