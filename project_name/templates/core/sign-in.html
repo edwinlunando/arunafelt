@@ -1,0 +1,7 @@
+{% templatetag openblock %} extends "base.html" {% templatetag closeblock %}
+
+{% templatetag openblock %} block page_title {% templatetag closeblock %}Sign In{% templatetag openblock %} endblock page_title {% templatetag closeblock %}
+
+{% templatetag openblock %} block content {% templatetag closeblock %}
+    {% templatetag openblock %} include "core/_sign-in.html" {% templatetag closeblock %}
+{% templatetag openblock %} endblock content {% templatetag closeblock %}

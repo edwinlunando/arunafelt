@@ -1,0 +1,58 @@
+{% templatetag openblock %} extends "base.html" {% templatetag closeblock %}
+{% templatetag openblock %} load widget_tweaks {% templatetag closeblock %}
+
+{% templatetag openblock %} block page_title {% templatetag closeblock %}Contact{% templatetag openblock %} endblock page_title {% templatetag closeblock %}
+
+{% templatetag openblock %} block content {% templatetag closeblock %}
+
+<form class="form-horizontal" role="form" method="post">
+    {% templatetag openblock %} csrf_token {% templatetag closeblock %}
+    <div class="form-group  {% templatetag openvariable %} form.name.errors|yesno:"has-error," {% templatetag closevariable %}">
+        <label for="inputDate" class="col-lg-2 control-label">Name</label>
+
+        <div class="col-lg-4">
+            {% templatetag openblock %} render_field form.name class="form-control" {% templatetag closeblock %}
+            <span class="help-block">{% templatetag openvariable %} form.name.errors {% templatetag closevariable %}</span>
+        </div>
+
+    </div>
+    <div class="form-group {% templatetag openvariable %} form.address.errors|yesno:"has-error," {% templatetag closevariable %}">
+        <label for="inputDays" class="col-lg-2 control-label">Address</label>
+
+        <div class="col-lg-4">
+            {% templatetag openblock %} render_field form.address class="form-control" {% templatetag closeblock %}
+            <span class="help-block">{% templatetag openvariable %} form.address.errors {% templatetag closevariable %}</span>
+        </div>
+    </div>
+    <div class="form-group {% templatetag openvariable %} form.email.errors|yesno:"has-error," {% templatetag closevariable %}">
+        <label for="inputDays" class="col-lg-2 control-label">Email</label>
+
+        <div class="col-lg-4">
+            {% templatetag openblock %} render_field form.email class="form-control" {% templatetag closeblock %}
+            <span class="help-block">{% templatetag openvariable %} form.email.errors {% templatetag closevariable %}</span>
+        </div>
+    </div>
+    <div class="form-group {% templatetag openvariable %} form.telephone.errors|yesno:"has-error," {% templatetag closevariable %}">
+        <label for="inputDays" class="col-lg-2 control-label">Telephone</label>
+
+        <div class="col-lg-4">
+            {% templatetag openblock %} render_field form.telephone class="form-control" {% templatetag closeblock %}
+            <span class="help-block">{% templatetag openvariable %} form.telephone.errors {% templatetag closevariable %}</span>
+        </div>
+    </div>
+    <div class="form-group {% templatetag openvariable %} form.message.errors|yesno:"has-error," {% templatetag closevariable %}">
+        <label for="inputDays" class="col-lg-2 control-label">Message</label>
+
+        <div class="col-lg-4">
+            {% templatetag openblock %} render_field form.message class="form-control" {% templatetag closeblock %}
+            <span class="help-block">{% templatetag openvariable %} form.message.errors {% templatetag closevariable %}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</form>
+
+{% templatetag openblock %} endblock content {% templatetag closeblock %}

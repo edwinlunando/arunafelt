@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<h1>
+    {% templatetag openblock %} block header {% templatetag closeblock %}
+
+    {% templatetag openblock %} endblock {% templatetag closeblock %}
+</h1>
+
+{% templatetag openblock %} block body {% templatetag closeblock %}
+
+{% templatetag openblock %} endblock {% templatetag closeblock %}
+</body>
+
+</html>
+
