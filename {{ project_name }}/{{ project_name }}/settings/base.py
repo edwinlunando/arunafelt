@@ -326,7 +326,7 @@ PIPELINE_JS = {
     'application': {
         'source_filenames': (
             'js/bootstrap.min.js',
-            'js/arunafelt.js',
+            'js/{{ project_name }}.js',
         ),
         'output_filename': 'js/application.js',
     }
@@ -337,4 +337,4 @@ PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 
 # DJANGO GRAPPELLI https://github.com/sehmaschine/django-grappelli
 
-GRAPPELLI_ADMIN_TITLE = 'arunafelt'
+GRAPPELLI_ADMIN_TITLE = '{{ project_name }}'
