@@ -17,6 +17,15 @@ development is easier. The specific goals are:
 4. Assets pipelining with django-pipeline with jsmin and gzip compression for static files
 5. Twitter Bootstrap default integration
 
+Quick Start
+===========
+
+If you want to start using the template, run this command::
+
+    $ django-admin.py startproject --template=https://github.com/edwinlunando/arunafelt/archive/master.zip --extension=py,rst,html project_name
+    
+Change the `project_name` into your preference.
+
 How to use
 ==========
 
