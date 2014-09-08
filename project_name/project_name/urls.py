@@ -23,9 +23,9 @@ urlpatterns = patterns('',
                        # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
                        # Uncomment the next line to enable the admin:
-                       (r'^grappelli/', include('grappelli.urls')), # grappelli URLS
+                       (r'^grappelli/', include('grappelli.urls')),  # grappelli URLS
                        url(r'^admin/', include('admin_honeypot.urls'), namespace='admin_honeypot'), # The fake admin URI
-                       url(r'^backend/', include(admin.site.urls)), # The real admin URI
+                       url(r'^backend/', include(admin.site.urls)),  # The real admin URI
                        )
 
 # Uncomment the next line to serve media files in dev.
