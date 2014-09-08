@@ -1,0 +1,1 @@
+http://{% templatetag openblock %} host {% templatetag closeblock %}{% templatetag openblock %} url "reset-password" token {% templatetag closeblock %}

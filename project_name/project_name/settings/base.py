@@ -338,3 +338,7 @@ PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 # DJANGO GRAPPELLI https://github.com/sehmaschine/django-grappelli
 
 GRAPPELLI_ADMIN_TITLE = '{{ project_name }}'
+
+# TEST RUNNER https://docs.djangoproject.com/en/dev/topics/testing/advanced/#defining-a-test-runner
+
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
