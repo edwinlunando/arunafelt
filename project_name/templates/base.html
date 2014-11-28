@@ -1,5 +1,5 @@
 {% templatetag openblock %} load staticfiles {% templatetag closeblock %}
-{% templatetag openblock %} load compressed {% templatetag closeblock %}
+{% templatetag openblock %} load pipeline {% templatetag closeblock %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +85,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-{% templatetag openblock %} compressed_js 'application' {% templatetag closeblock %}
+{% templatetag openblock %} javascript 'application' {% templatetag closeblock %}
 {% templatetag openblock %} block extra_js {% templatetag closeblock %}{% templatetag openblock %} endblock extra_js {% templatetag closeblock %}
 </body>
 </html>
