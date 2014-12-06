@@ -42,8 +42,7 @@ The main framework.
 bpython
 -------
 
-bpython is an alternative interface from the standard python interpreter. It has auto complete feature and in-line 
-syntax highlighting
+bpython is an alternative interface from the standard python interpreter. It has auto complete feature and in-line syntax highlighting.
 
 django-braces
 -------------
@@ -54,6 +53,11 @@ most useful Mixin is `LoginRequiredMixin`
 django-model-utils
 ------------------
 
+django-model-utils provides a lot of 
 
+django-autoslug
+---------------
+
+django-autoslug give you a slug field for your model automatically.
 
 This repo is in under heavy development!

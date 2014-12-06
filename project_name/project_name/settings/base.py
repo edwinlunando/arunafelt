@@ -203,6 +203,7 @@ DJANGO_APPS = (
     'admin_honeypot',  # https://github.com/dmpayton/django-admin-honeypot
     'ckeditor',  # https://pypi.python.org/pypi/django-ckeditor-updated/4.4.0
     'pipeline',  # https://github.com/cyberdelia/django-pipeline
+    'django_extensions',  # https://github.com/django-extensions/django-extensions
 )
 
 # Apps specific for this project go here.
