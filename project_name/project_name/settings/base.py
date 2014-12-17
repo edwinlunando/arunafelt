@@ -282,27 +282,10 @@ CKEDITOR_IMAGE_BACKEND = 'Pillow'
 
 CKEDITOR_CONFIGS = {
     'default': {
+        'width': 'auto',
         'toolbar': [
             ['Bold', 'Italic', 'Underline', '-', 'Blockquote', '-', 'Subscript', 'Superscript', 'Outdent', 'Indent'],
             ['Format', 'Font'],
-            ['Link', 'Unlink'],
-            ['Image', 'Table', 'SpecialChar'],
-            ['NumberedList', 'BulletedList'],
-        ],
-    },
-    'comment': {
-        'width': 728,
-        'toolbar': [
-            ['Bold', 'Italic', 'Underline', '-', 'Blockquote', '-', 'Subscript', 'Superscript', 'Outdent', 'Indent'],
-            ['Link', 'Unlink'],
-            ['Image', 'Table', 'SpecialChar'],
-            ['NumberedList', 'BulletedList'],
-        ],
-    },
-    'discussion': {
-        'width': 574,
-        'toolbar': [
-            ['Bold', 'Italic', 'Underline', '-', 'Blockquote', '-', 'Subscript', 'Superscript', 'Outdent', 'Indent'],
             ['Link', 'Unlink'],
             ['Image', 'Table', 'SpecialChar'],
             ['NumberedList', 'BulletedList'],
@@ -317,7 +300,7 @@ PIPELINE_JS = {
     'application': {
         'source_filenames': (
             'js/bootstrap.min.js',
-            'js/{{ project_name }}.js',
+            'js/main.js',
         ),
         'output_filename': 'js/application.js',
     }
