@@ -1,4 +1,4 @@
-Django==1.7.1
+Django==1.7.2
 bpython==0.13.1
 django-braces==1.4.0
 django-model-utils==2.2
@@ -9,6 +9,7 @@ django-ckeditor-updated==4.4.0
 django-imagekit==3.2.4
 django-pipeline==1.4.2
 django-grappelli==2.5.3
+django-faker==0.2.0
 Werkzeug==0.9
 django-extensions==1.4.6
 jsmin==2.0.9
